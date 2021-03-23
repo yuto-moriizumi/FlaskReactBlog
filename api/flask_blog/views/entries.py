@@ -1,6 +1,6 @@
 # 記事関連のルーティングを行う
 
-from flask import request, redirect, url_for, render_template, flash, Response, jsonify
+from flask import request, Response
 from flask_blog import db
 from flask_blog.models.entries import Entry
 from flask import Blueprint
@@ -25,7 +25,7 @@ def show_entries():
 def add_entry():
     # request.formでフォームのデータを受け取れる nameを指定する
     req = json.loads(request.get_data())
-    entry = Entry(title=req.title, text=req.text)
+    entry = Entry(title=req.get("title"), text=req.get("text"))
     db.session.add(entry)  # addしてcommitすることでデータベースに変更を行える
     db.session.commit()
     return Response(status=201)
@@ -43,8 +43,9 @@ def show_entry(id):
 def update_entry(id):
     entry = Entry.query.get(id)
     req = json.loads(request.get_data())
-    entry.title = req.form["title"]
-    entry.text = req.form["text"]
+    print(req)
+    entry.title = req.get("title")
+    entry.text = req.get("text")
     db.session.add(entry)
     db.session.commit()
     return Response(status=200)

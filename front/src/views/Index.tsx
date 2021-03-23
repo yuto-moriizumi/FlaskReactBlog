@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 type Entry = {
   id: number; title: string; text: string; created_at: string;
@@ -29,7 +30,9 @@ export default class Index extends React.Component<{}, State> {
               <Card.Title>{entry.title}</Card.Title>
               <Card.Body>
                 <p>{entry.text}</p>
-                <a href="#" className="card-link">続きを読む</a>
+                <Link to={`/entries/${entry.id}`}>
+                  続きを読む
+                </Link>
               </Card.Body>
             </Card.Body>
           </Card>
