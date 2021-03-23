@@ -4,16 +4,12 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import Auth0ProviderWithHistory from "./components/Auth0ProviderWithHistory";
-import enableMock from "./utils/mockApi";
 
 // enableMock();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Auth0ProviderWithHistory>
-        <App />
-      </Auth0ProviderWithHistory>
+      <App />
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

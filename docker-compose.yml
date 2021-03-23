@@ -10,7 +10,7 @@ services:
     ports:
       - "80:3000"
     environment:
-      REACT_APP_SERVER_URL: "http://localhost:3000"
+      REACT_APP_SERVER_URL: "http://localhost:5000"
   api:
     image: python:3.9-buster
     ports:
@@ -18,9 +18,10 @@ services:
     volumes:
     - ./api:/usr/src
     working_dir: "/usr/src"
-    command: sh -c "pip install flask flask-sqlalchemy flask-script coverage && flask run --host=0.0.0.0 --port=5000"
+    command: sh -c "pip install flask flask-sqlalchemy flask-script coverage flask-cors && flask run --host=0.0.0.0 --port=5000"
     environment:
       FLASK_APP: "flask_blog"
       FLASK_ENV: "development"
+      CLIENT_URL: "http://localhost"
 volumes:
   front_modules:

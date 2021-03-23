@@ -5,6 +5,7 @@ from flask_blog import db
 from flask_blog.models.entries import Entry
 from flask import Blueprint
 import json
+import os
 
 entry = Blueprint("entry", __name__)
 
@@ -15,7 +16,9 @@ def show_entries():
     entries = Entry.query.order_by(Entry.id.desc()).all()  # ORMですべての記事を整列して返す
     # render_templateの第2引数以降で変数を渡せる
     res = json.dumps([i.toDict() for i in entries], ensure_ascii=False)
-    return Response(res, headers=dict([["Content-Type", "text/json"]]))
+    res = Response(res, headers=dict(
+        [["Content-Type", "text/json"]]))
+    return res
 
 
 @ entry.route("/entries", methods=['POST'])
@@ -53,3 +56,14 @@ def delete_entry(id):
     db.session.delete(entry)  # deleteで削除
     db.session.commit()
     return Response(status=204)
+
+
+@entry.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin',
+                         os.environ.get("CLIENT_URL"))
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    return response
