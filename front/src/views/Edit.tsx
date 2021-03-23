@@ -30,7 +30,7 @@ export default class Edit extends React.Component<Prop, State> {
                     </div>
                     <div className="form-group">
                         <label htmlFor="InputText" className="form-label">本文</label>
-                        <textarea className="form-control" id="InputText" name="text" rows={3} defaultValue={this.state.text}></textarea>
+                        <textarea className="form-control" id="InputText" name="text" rows={3} defaultValue={this.state.text} onChange={(e) => { this.setState({ text: e.target.value }) }}></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary" onClick={(e) => {
                         e.preventDefault();

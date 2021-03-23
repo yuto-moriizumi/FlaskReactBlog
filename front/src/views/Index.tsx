@@ -25,7 +25,7 @@ export default class Index extends React.Component<{}, State> {
     return (
       <ul className="list-group list-group-flush">
         {this.state.entries.length === 0 ? "投稿がありません" : this.state.entries.map(entry =>
-          <Card key={entry.id}>
+          <Card key={entry.id} className="mt-3">
             <Card.Body>
               <Card.Title>{entry.title}</Card.Title>
               <Card.Body>

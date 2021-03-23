@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
 import Index from "./views/Index";
-import { Nav, Navbar, Image } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import View from "./views/View";
 import Edit from "./views/Edit";
 import Post from "./views/Post";
@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <Navbar className="navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
             <Link to="/" className="h2 navbar-brand">
               Flask &amp; React Blog SPA
@@ -35,7 +35,7 @@ export default class App extends React.Component {
               </ul>
             </div>
           </div>
-        </nav>
+        </Navbar>
         <div className="container">
           <div className="blog-body">
             <Route exact path="/post" component={Post} />
